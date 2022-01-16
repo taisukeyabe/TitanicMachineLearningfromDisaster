@@ -52,7 +52,7 @@ data.loc[(data['FamilySize']>=5) & (data['FamilySize']<=7),'FamilySize_bin'] = '
 
 #消さない場合
 #Ticket
-data.loc[:, 'TicketFreq'] = data.groupby(['Ticket'])['PassengerId'].transform('count')
+#data.loc[:, 'TicketFreq'] = data.groupby(['Ticket'])['PassengerId'].transform('count')
 
 #Name
 # テストデータの敬称(honorific)を抽出
@@ -89,7 +89,7 @@ le = preprocessing.LabelEncoder()
 for col in le_target_col:
     data.loc[:, col] = le.fit_transform(data[col])
     
-#カテゴリカル変数をOne-Hot Encodingします。
+#カテゴリカル変数をOne-Hot Encoding
 cat_col = ['Embarked','FamilySize_bin', 'Pclass','Cabin_ini', 'honorific', 'Fare_bin']
 data=pd.get_dummies(data, drop_first=True, columns=cat_col)
 
@@ -176,7 +176,7 @@ import optuna
 # CV分割数
 cv = 5
 
-# 上の学習の精度を見比べる感じこの前処理だと、ランダムフォレストが一番聞きそうなのでこれをチューニングします。
+# 上の学習の精度を見比べる感じこの前処理だと、ランダムフォレストが一番聞きそうなのでこれをチューニング
 def objective(trial):
     
     param_grid_rfc = {
